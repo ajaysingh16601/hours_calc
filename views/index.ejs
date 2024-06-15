@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Scraping Login</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body class="dark-mode">
+    <div class="container">
+        <label class="toggle_label">
+            <input type="checkbox" id="mode" class="toggle" checked>
+            <span class="slider round">
+                <i class="fa-solid fa-moon fa-lg fa-spin moon"></i>
+                <i class="fa-solid fa-sun fa-spin fa-lg sun"></i>
+            </span>
+        </label>
+        <p id="theme"></p>
+    </div>
+    <h1>Enter your credentials</h1>
+    <form id="loginForm">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        $(document).ready(function () {
+            $('#loginForm').on('submit', function (e) {
+                e.preventDefault();
+                const email = $('#email').val();
+                const password = $('#password').val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/scrape',
+                    data: { email, password },
+                    success: function (data) {
+                        $('#result').html(`<p>${data.result}</p>`).show();
+                    },
+                    error: function (err) {
+                        $('#result').html(`<p>Error: ${err.responseText}</p>`).show();
+                    }
+                });
+            });
+
+            // Toggle dark mode
+            $('#mode').on('change', function () {
+                if (this.checked) {
+                    $('body').addClass('dark-mode');
+                } else {
+                    $('body').removeClass('dark-mode');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

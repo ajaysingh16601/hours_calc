@@ -1,0 +1,132 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background-color: #333;
+    color: #f4f4f4;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+label, input {
+    margin: 5px 0;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#result {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    max-width: 500px;
+    word-wrap: break-word;
+    display: none; /* Initially hidden */
+}
+
+body.dark-mode #result {
+    background-color: #444;
+    border-color: #555;
+}
+
+.container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.toggle_label {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.toggle {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.toggle:checked + .slider {
+    background-color: #007bff;
+}
+
+.toggle:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.moon, .sun {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #f4f4f4;
+}
+
+.moon {
+    left: 10px;
+    display: none;
+}
+
+.sun {
+    right: 10px;
+}
+
+.toggle:checked + .slider .moon {
+    display: block;
+}
+
+.toggle:checked + .slider .sun {
+    display: none;
+}
